@@ -1,0 +1,4 @@
+<div class="gamediv" style="background-image: radial-gradient(circle);">
+  <img style="margin-bottom:20px;height:180px;width:300px;" src="/images/.png"><br>
+  <a class="gtext" href=""></a>
+</div>

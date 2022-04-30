@@ -1,0 +1,15 @@
+<title>MyohTheGod's Website</title>
+<script src="favicon.js"></script>
+<head>
+    <link rel="stylesheet" href="/games/Slope/TemplateData/style.css">
+    <script src="/games/Slope/TemplateData/UnityProgress.js"></script>
+    <script src="/games/Slope/TemplateData/unityloader41.js"></script>
+    <script>
+        var gameInstance = UnityLoader.instantiate("gameContainer", "/games/Slope/Build/slope.json", { onProgress: UnityProgress, Module: { onRuntimeInitialized: function() { UnityProgress(gameInstance, "complete") } } });
+    </script>
+</head>
+<body style="margin: 0; overflow: hidden;">
+    <div class="webgl-content">
+        <div id="gameContainer" style="width: 100%; height: 100%; margin: 0;"></div>
+    </div>
+</body>

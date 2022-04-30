@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <script src="favicon.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Food Rampage</title>
+    <link rel="shortcut icon" href="/games/foodrampage/TemplateData/favicon.ico">
+    <link rel="stylesheet" href="/games/foodrampage/TemplateData/style.css">
+    <script src="/games/foodrampage/TemplateData/UnityProgress.js"></script>
+    <script src="/games/foodrampage/Build/UnityLoader.js"></script>
+    <script>
+      var unityInstance = UnityLoader.instantiate("unityContainer", "/games/foodrampage/Build/food-rampage.json", {onProgress: UnityProgress});
+    </script>
+  </head>
+  <body>
+    <div class="webgl-content">
+      <div id="unityContainer" style="width: 1040px; height: 585px"></div>
+      <div class="footer">
+        <div class="webgl-logo"></div>
+        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
+        <div class="title">Food Rampage</div>
+      </div>
+    </div>
+  </body>
+</html>

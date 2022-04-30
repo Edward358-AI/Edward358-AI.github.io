@@ -1,0 +1,2 @@
+<title>MyohTheGod's Website</title>
+<link rel="icon" type="image/x-icon" href="/supercorn.gif" defer></link>
