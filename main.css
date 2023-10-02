@@ -8,6 +8,16 @@ html {
   animation: zoomIn 0.5s;
 }
 
+#cover {
+  position: fixed;
+  display:none;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 100vh;
+  background-color: rgba(128, 128, 128, 0.5);
+  z-index: 2;
+}
+
 body {
   text-align:center;
   margin: 0;
@@ -19,7 +29,6 @@ body {
   padding: 0;
   overflow-wrap: break-word;
   color: cyan;
-  overflow:hidden;
   line-height: 1.5rem;
 }
 
@@ -67,7 +76,7 @@ body {
 }
 
 #contact {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
@@ -81,6 +90,7 @@ body {
   width: fit-content;
   background-color: #000064;
   padding: 0px 20px;
+  z-index: 3;
 }
 
 #about {
