@@ -1,39 +1,64 @@
-<!DOCTYPE html>
+<script setup>
+  import { ref, computed, watch } from 'vue'
 
-<html>
+  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789'.split('')
+  function newId() {
+    let newId = ""
+    for (let i = 0; i < 7; i++) {
+      newId += chars[Math.floor(Math.random() * chars.length)]
+    }
+    return newId
+  }
+  const newTodo = ref("")
+  const todos = ref([{id: newId(), text: "Learn Vue.js", complete: false, editing: false}])
+  if (Array.isArray(JSON.parse(localStorage.getItem("todos")))) {
+    todos.value = JSON.parse(localStorage.getItem("todos"))
+  }
+  setInterval(() => {localStorage.setItem("todos", JSON.stringify(todos.value))}, 60)
+  
+  
+  function addTodo() {
+    newTodo.value.replace(/^\s+|\s+$/g, '') ? todos.value.push({id: newId(), text: newTodo.value, complete: false, editing: false}) : ""
+    newTodo.value = ""
+  }
 
-<head>
-  <title>r3alitycubedSK's Website</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="r3alitycubedSK's website" />
-  <link href="main.css" rel="stylesheet">
-  <link rel="icon" href="img/infoicon.png">
-</head>
+  function removeTodo(todo) {
+    todos.value = todos.value.filter((t) => t.id !== todo.id)
+  }
+  function isEmpty(obj) {
+    for (var prop in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+        return false;
+      }
+    }
+    return true
+  }
+</script>
 
-<body>
-  <div id="cover"></div>
-  <div id="heading">
-    <a id="headingcontainer" href=""><img src="img/webprogram.png" height="64px" width="64px"><h2 id="title">&nbsp;&nbsp;r3alitycubedSK</h2></a>
-    <span id="pagelinks">
-      <a href="javascript:void(0)" class="pagelink">About</a>
-      <a href="javascript:void(0)" class="pagelink">Projects</a>
-    </span>
+<template>
+  <h1>To-do List</h1>
+  <p>Made by Edward Jiang</p>
+  <form @submit.prevent="addTodo">
+    <input type="text" class="form-control" v-model="newTodo" />
+    <input type="submit" value="Add Todo" class="btn btn-light" />
+  </form>
+  <p style="font-size:1.2rem;" :class="isEmpty(todos) ? '' : 'd-none'">Hooray! You've finished everything on your todo list! Cheers :D</p>
+  <div class="todo-container card" :class="isEmpty(todos) ? 'd-none' : ''">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" v-for="todo in todos" :class="todo.complete ? 'bg-light' : ''">
+        <span :class="todo.complete ? 'done' : ''">
+          {{ todo.editing ? '' : todo.text }}
+        <form @submit.prevent="todo.editing=false" class="inlineform" :class="todo.editing ? '' : 'd-none'">
+          <input type="text" class="form-control" v-model="todo.text"/>
+          <input type="submit" value="Update" class="btn btn-light" />
+        </form>
+        </span>
+        <span class="options">
+          <i class="bi bi-bookmark-check text-success" @click="todo.complete = !todo.complete"></i>
+          <i class="bi bi-pencil-square text-muted" @click="todo.editing = !todo.editing"></i>
+          <i class="bi bi-x-circle text-danger" @click="removeTodo(todo)"></i>
+        </span>
+      </li>
+    </ul>
   </div>
-  <div id="about">
-    <h3>Hi, I'm Edward!</h3>
-    <p>I'm a high school student who enjoys web development, problem solving, science, and programming.<br><br>My skills in the programming world include advanced-intermediate understanding of HTML, CSS, JS, and Python, and (extremely) novice experience in VueJS and VanJS.<br><br>This website was made using HTML, CSS, and a tiny splash of JS.<br><br>You can find my projects on my projects page. You can contact me <a id="showcontact" href="javascript:void(0)">here</a>.</p>
-  </div>
-  <div id="projects">
-    <h3>Projects</h3>
-    <p>Over the course of my life, I've worked on a few projects, all of which are displayed here:<br><br>First off, this website! Built with HTML, CSS, JS, and compared to my old website, load speeds are significantly cut down, the style is simpler, sleeker, more modern, and responsive. <a href="https://r3alitycubedsk.glitch.me">Old website</a><br><br><a href="https://replit.com/@edjiang1234/coin-clicker?embed=1">Coin clicker</a>: Idle clicker game built with Pygame Zero and Python<br><a href="https://edward358-ai.github.io/Food-Rampage">Food Rampage</a>: Unity FPS minigame built with FPS Minigame Template<br><a href="https://edward358-ai.github.io/thericefarm">Peasant Liu's Rice Farming Simulator</a>: A crude game made with terrible CSS and clumsy javascript (report any bugs to me!)<br><a href="https://glo-edward358-ai.koyeb.app">MyohTheWeb</a>: Frontend redesign of TN's Ultraviolet backend service<br><a href="https://edward358-ai.github.io/myohthegod">MyohTheGod's Website</a>: A crude looking website with shitty CSS not gonna lie but if you wanna have some fun go there<br><br>*the end :)*</p>
-  </div>
-  <div id="contact">
-    <h3>Contact</h3>
-    <p>You can contact me via these methods:<br><br>Email - <a href="mailto:edward456jiang@gmail.com">edward456jiang@gmail.com</a><br>Discord - edward.jiang_<br>Github: <a href="https://github.com/Edward358-AI">Edward358-AI</a><br>Replit: <a href="https://replit.com/@edjiang1234">edjiang1234</a><br>(click anywhere outside to close)</p>
-  </div>
-  <footer id="footer">
-    View the website's <a href="LICENSE.txt" target="_blank">license</a>. Source code: <a href="https://github.com/Edward358-AI/Edward358-AI.github.io">Github</a>
-  </footer>
-</body>
-<script src="script.js"></script>
-</html>
+</template>
