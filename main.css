@@ -76,6 +76,7 @@ body {
 }
 
 #contact {
+  border-radius: 10px;
   position: fixed;
   left: 0;
   right: 0;
@@ -95,7 +96,7 @@ body {
 
 #about {
   display:inline-block;
-  margin: 45px auto;
+  margin: auto;
   animation: zoomFade 0.3s;
   border-radius: 10px;
   border: 2px solid black;
@@ -117,7 +118,7 @@ body {
 
 #projects {
   display:none;
-  margin: 45px auto;
+  margin: auto;
   animation: zoomFade 0.3s;
   border-radius: 10px;
   border: 2px solid black;
